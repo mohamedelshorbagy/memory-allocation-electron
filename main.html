@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://bootswatch.com/3/cosmo/bootstrap.min.css">
+    <style>
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .memory-canvas {
+            width: 230px;
+            height: 250px;
+            overflow-x: hidden;
+        }
+
+        .btn {
+            margin-bottom: 15px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        .table thead {
+            background-color: #222;
+            color: #FFF;
+        }
+
+
+        #gantt__table {
+            margin-top: -25px;
+        }
+
+        .table.table-hover tbody tr td {
+            height: 10px;
+        }
+
+        .table>tbody>tr#gantt__scale>td {
+            border: none !important;
+            border-top: none !important;
+        }
+
+
+        #gantt td {
+            background-color: #DDD;
+            border: 1px solid #222;
+        }
+
+
+        .row.print {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <div id="app" class="container-fluid">
+        <h1 class="text-center">Memory Allocation</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                    <select id="method" class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5 col-xs-offset-1">
+                <h3>Hole Data</h3>
+                <form class="form-group" onsubmit="event.preventDefault(); addHole();">
+                    <input type="text" id="holeSize" class="form-control" placeholder="Hole Size" />
+                    <input type="text" id="holeStart" class="form-control" placeholder="From" />
+                    <button class="btn btn-success btn-block" type="submit">Add Hole</button>
+                </form>
+            </div>
+
+            <div class="col-xs-5">
+                <h3>Process Data</h3>
+                <form class="form-group process-form" onsubmit="event.preventDefault(); addProcess();">
+                    <input type="text" id="processName" class="form-control" placeholder="Process Name">
+                    <input type="text" id="processSize" class="form-control" placeholder="Process Size">
+                    <button class="btn btn-warning btn-block" type="submit">Add Process</button>
+                </form>
+            </div>
+        </div>
+
+        <hr>
+        <button class="btn btn-danger btn-block" onclick="clearMemory();">Reset</button>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <h4>Processes</h4>
+                <div class="responsive">
+                    <table class="table table-striped table-bordered table-hover process__table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>From</th>
+                                <th>To</th>
+                            </tr>
+                        </thead>
+                        <tbody id="processes__table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <h4>Holes</h4>
+                <div class="responsive">
+                    <table class="table table-striped table-bordered table-hover process__hole">
+                        <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th>From</th>
+                                <th>To</th>
+                            </tr>
+                        </thead>
+                        <tbody id="holes__table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Memeory Illustration -->
+            <div class="col-xs-4">
+                <h4>Memory</h4>
+                <div class="responsive memory-canvas">
+                    <canvas id="memoryCanvas" width="200" height="512" style="border:1px solid #DDD;">
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
